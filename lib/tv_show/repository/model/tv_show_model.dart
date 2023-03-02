@@ -6,7 +6,7 @@ class TVShowModel {
   final List<String>? genres;
   final String? summary;
   final String? status;
-  final String? schedule;
+  final Map<String, dynamic>? schedule;
   final String? url;
 
   TVShowModel({
@@ -25,13 +25,22 @@ class TVShowModel {
     return TVShowModel(
       id: json['show']['id'],
       name: json['show']['name'],
-      image: json['show']['image'] != null ? json['show']['image']['medium'] : null,
-      rating: json['show']['rating']['average'] != null ? json['show']['rating']['average'].toDouble() : 0,
-      genres: List<String>.from(json['show']['genres']),
-      summary: json['show']['summary'] != null ? json['show']['summary'].replaceAll(RegExp('<[^>]*>'), '') : "",
-      status: json['show']['status'],
-      schedule: json['show']['schedule']['time'] + ' ' + json['show']['schedule']['days'][0],
-      url: json['show']['url'],
+      image: json['show']['image'] != null
+          ? json['show']['image']['medium']
+          : null,
+      rating: json['show']['rating']['average'] != null
+          ? json['show']['rating']['average'].toDouble()
+          : null,
+      genres: json['show']['genres'] != null
+          ? List<String>.from(json['show']['genres'])
+          : null,
+      summary: json['show']['summary'] != null
+          ? json['show']['summary'].replaceAll(RegExp('<[^>]*>'), '')
+          : null,
+      status: json['show']['status'] != null ? json['show']['status'] : null,
+      schedule:
+          json['show']['schedule'] != null ? json['show']['schedule'] : null,
+      url: json['show']['url'] != null ? json['show']['url'] : null,
     );
   }
 }
